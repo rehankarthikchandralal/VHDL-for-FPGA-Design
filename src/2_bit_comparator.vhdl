@@ -1,5 +1,3 @@
-
-
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -10,7 +8,7 @@ entity comparator_2_bit is
   );
 end entity comparator_2_bit;
 
-architecture 1  Behavioral of comparator2 is
+architecture Behavioral of comparator_2_bit is
 begin
   c <= '1' when a = b else '0';
 end architecture Behavioral;
