@@ -12,4 +12,9 @@ ENTITY RAM128_32 IS
     );
 END RAM128_32;
 
+ARCHITECTURE Behavioral OF RAM128_32 IS
+    -- Declare the RAM as a 2D array with 128 rows, each 32 bits wide
+    TYPE ram_type IS ARRAY (0 TO 127) OF STD_LOGIC_VECTOR(31 DOWNTO 0);
+    SIGNAL ram : ram_type := (OTHERS => (OTHERS => '0')); -- Initialize all memory locations to '0'
+BEGIN
 
