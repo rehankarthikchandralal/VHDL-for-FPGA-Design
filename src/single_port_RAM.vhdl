@@ -18,3 +18,18 @@ ARCHITECTURE Behavioral OF RAM128_32 IS
     SIGNAL ram : ram_type := (OTHERS => (OTHERS => '0')); -- Initialize all memory locations to '0'
 BEGIN
 
+PROCESS (clock)
+BEGIN
+    IF rising_edge(clock) THEN
+        IF wren = '1' THEN
+            -- Write operation
+            ram(to_integer(unsigned(address))) <= data;
+        END IF;
+    END IF;
+END PROCESS;
+END Behavioral;
+            -- Read operation
+            q <= ram(to_integer(unsigned(address)));
+        END IF;
+    END PROCESS;
+END Behavioral;
