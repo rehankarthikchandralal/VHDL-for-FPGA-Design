@@ -5,17 +5,22 @@ begin
     begin
         if (SR = '0') then  -- Active low reset
             count <= "0000";  -- Reset the counter
+            TC <= '0';        -- Reset Terminal Count
         elsif rising_edge(CP) then
             if (PE = '1' and CEP = '1') then
                 count <= P;  -- Load parallel input if enabled
+                TC <= '0';   -- Reset Terminal Count after loading
             elsif (CET = '1') then
                 if (count = "1111") then
-                    TC <= '1';  -- Set Terminal Count when counter reaches max value
+                    count <= "0000";  -- Wrap around on max value
                 else
-                    TC <= '0';
-                    count <= count + 1;  -- Increment counter
+                    count <= std_logic_vector(unsigned(count) + 1);  -- Increment counter
                 end if;
             end if;
         end if;
     end process;
+
+    -- Update Terminal Count (TC) outside of other conditions
+    TC <= '1' when count = "1111" else '0';
+
 end Behavioral;
